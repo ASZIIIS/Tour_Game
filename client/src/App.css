@@ -1,0 +1,88 @@
+/* 全局样式 */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 顶栏样式 */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #282c34;
+  color: white;
+}
+
+/* 主体区域 */
+.main-content {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+/* 左边栏样式 */
+.left-sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* 地图容器样式 */
+.map-container {
+  flex-grow: 1;
+  overflow-y: scroll;
+  padding: 20px;
+  background-color: #e8e8e8;
+}
+
+.map-content {
+  height: 2000px; /* 模拟一个长地图 */
+  background-color: #ddd;
+  border: 1px solid #ccc;
+}
+
+/* 右侧栏样式 */
+.right-sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+/* 底栏样式 */
+.bottom-bar {
+  padding: 10px;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hand-cards {
+  display: flex;
+  gap: 10px;
+}
+
+.card {
+  width: 60px;
+  height: 90px;
+  background-color: #fff;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}

@@ -14,14 +14,7 @@ class Card {
             console.log(`成功加载卡牌效果: ${this.name}`);
         } catch (error) {
             console.error(`加载卡牌效果时发生异常: ${this.name}`, error.message);
-            this.logErrorToFile(error); // 将异常记录到日志文件
         }
-    }
-
-    logErrorToFile(error) {
-        const logMessage = `[${new Date().toISOString()}] 卡牌: ${this.name}, 错误: ${error.stack}\n`;
-        fs.appendFileSync('error_log.txt', logMessage, 'utf8'); // 异步追加日志到文件
-        console.log("异常信息已记录到 error_log.txt");
     }
 }
 

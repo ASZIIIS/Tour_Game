@@ -23,3 +23,7 @@ class CardPackage{
         this.filePath=filePath
     }
 }
+
+class CardPool{
+    
+}

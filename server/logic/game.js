@@ -11,8 +11,8 @@ class Game {
         */
         this.utils=utils;
         this.players=players;
-        InitializeMap(map);
-        InitializeCards(card_packages);
+        this.InitializeMap(map);
+        this.InitializeCards(card_packages);
         this.InitializePlayers();
         this.currentPlayerIndex = 0; // 当前玩家索引
         this.currentPhase = 0; // 当前阶段
@@ -61,7 +61,6 @@ class Game {
     
     // 触发事件
     triggerEvent(event, data) {
-        console.log(`事件触发: ${event}`);
         if (this.eventObservers.has(event)) {
             for (const observer of this.eventObservers.get(event)) {
                 observer.callback(data);
@@ -70,11 +69,44 @@ class Game {
     }
     
     //扔骰子
+    rollDice(min, max, player){
+        this.triggerEvent("rollDice", player);
+        this.currentDice=Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
     //抽卡
+    drawCard(cardpool, player){
+        this.triggerEvent("drawCard", player);
+        //TODO: 抽卡
+        this.triggerEvent("getCard", {player: player, card: card})
+    }
+
     //移动
-    //触发格点
+    move(path,player){
+        /*
+        path: 移动路径上经过的所有格点
+        player：移动的玩家
+        */
+        let currentGrid=player.currentGrid;
+        for(let index in path){
+            //TODO: 通知前端移动
+            currentGrid=path[index];
+            currentGrid.pass(this, player);
+        }
+    }
+
     //打出卡牌
-    
+    useCard(card, player){
+        this.triggerEvent("useCard", player);
+
+    }
+
+    //选择玩家
+    choosePlayer(canChoosePlayers, player){
+        //TODO: 前端选择
+        let chosenPlayer;
+        this.triggerEvent("choose",{chosen: chosenPlayer, player: player});
+    }
 }
 
 class ForceInterrupt extends Error {

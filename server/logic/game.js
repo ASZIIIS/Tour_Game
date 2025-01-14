@@ -98,7 +98,7 @@ class Game {
     //打出卡牌
     useCard(card, player){
         this.triggerEvent("useCard", player);
-
+        card.effect(player);
     }
 
     //选择玩家

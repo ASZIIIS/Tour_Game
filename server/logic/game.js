@@ -9,33 +9,34 @@ class Game {
         map: 对局地图
         card_pools: 一个数组，是各个卡池
         */
-        this.utils=utils;
+        this.map=map;
+        this.cardpools=card_pools;
         this.players=players;
-        this.InitializeMap(map);
-        this.InitializeCards(card_packages);
-        this.InitializePlayers();
         this.currentPlayerIndex = 0; // 当前玩家索引
-        this.currentPhase = 0; // 当前阶段
+        this.currentPlayer=this.players[this.currentPlayerIndex];
         this.currentDice=undefined; //全局控制骰子
+        this.playing=true;//对局是否在进行中
         this.eventObservers = new Map();
-    }
-
-    InitializeMap(){
-
-    }
-
-    InitializeCards(){
-        
-    }
-
-    InitializePlayers(){
-
+        this.cardpools=new Map();
     }
 
     static logErrorToFile(error, log_path, info=null) {
         const logMessage = `[${new Date().toISOString()}] 错误: ${error.stack}\n`;
         fs.appendFileSync(log_path, logMessage, 'utf8'); // 异步追加日志到文件
         console.log("异常信息已记录到 error_log.txt");
+    }
+
+    startGame(){
+        while(this.playing){
+            this.goTurn(this.currentPlayer);
+            this.currentPlayerIndex=(this.currentPlayerIndex+1)%this.players.length;
+            this.currentPlayer=this.players[this.currentPlayerIndex];
+        }
+    }
+
+    //执行回合
+    goTurn(player){
+
     }
     
     // 注册观察者
@@ -72,6 +73,7 @@ class Game {
     rollDice(min, max, player){
         this.triggerEvent("rollDice", player);
         this.currentDice=Math.floor(Math.random() * (max - min + 1)) + min;
+        //TODO: 广播
     }
 
     //抽卡
@@ -79,6 +81,7 @@ class Game {
         this.triggerEvent("drawCard", player);
         //TODO: 抽卡
         this.triggerEvent("getCard", {player: player, card: card})
+        //TODO: 广播
     }
 
     //移动
@@ -93,11 +96,13 @@ class Game {
             currentGrid=path[index];
             currentGrid.pass(this, player);
         }
+        //TODO: 广播
     }
 
     //打出卡牌
     useCard(card, player){
         this.triggerEvent("useCard", player);
+        //TODO: 广播
         card.effect(player);
     }
 
@@ -106,6 +111,11 @@ class Game {
         //TODO: 前端选择
         let chosenPlayer;
         this.triggerEvent("choose",{chosen: chosenPlayer, player: player});
+    }
+
+    //更新状态
+    updateState(player, status){
+        //TODO: 通知前端状态更新
     }
 }
 
@@ -132,5 +142,8 @@ function loadPlayers(player_names, player_types, player_agents){
 
 }
 
-module.exports={Game};
+module.exports={
+    Game,
+    ForceInterrupt,
+};
 

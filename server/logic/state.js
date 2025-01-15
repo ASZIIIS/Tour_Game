@@ -3,8 +3,8 @@ class State{
         this.name=name;
         this.player=player;
     }
-    static influence(player){
-        throw Error("未定义");
+    static influence(game, player){
+        //TODO：
     }
     addState(){
         throw Error("未定义");

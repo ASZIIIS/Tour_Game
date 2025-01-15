@@ -3,8 +3,10 @@ class Player {
         this.name = name;
         this.health = 100;
     }
-
-    
+    //扔骰子
+    //移动
+    //抽卡
+    //使用卡牌
 }
 
 class RealPlayer extends Player {

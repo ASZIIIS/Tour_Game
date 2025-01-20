@@ -7,6 +7,6 @@ class Agent{
         agent.skillList.set(skillName, skill);
     }
     useSkill(name, data){
-        
+        this.skillList.get(name)(data);
     }
 }

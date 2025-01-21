@@ -1,18 +1,8 @@
 class State{
-    constructor(name, player){
+    constructor(name){
         this.name=name;
-        this.player=player;
     }
-    static influence(game, player){
-        //TODO：
-    }
-    addState(){
-        throw Error("未定义");
-    }
-    updateState(){
-        throw Error("未定义");
-    }
-    removeState(){
+    influence(game, player, data){
         throw Error("未定义");
     }
 }

@@ -16,7 +16,6 @@ class Map{
     }
     //获取可以到达的格点列表
     canReach(start, range, forward=false){
-        this.clearVisited();
         let queue=[];
         let can_reach=[];
         queue.push(start);
@@ -27,6 +26,7 @@ class Map{
             if(this.grids[current].visited>=range){
                 continue;
             }
+            can_reach.push(current);
             for(let next of this.grids[current].nextGrids){
                 if(this.grids[next].visited===-1){
                     this.grids[next].visited=this.grids[current].visited+1;
@@ -42,6 +42,8 @@ class Map{
                 }
             }
         }
+        this.clearVisited();
+        return can_reach;
     }
     //返回移动经过的路径
 }

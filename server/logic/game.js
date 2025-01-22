@@ -36,7 +36,7 @@ class Game {
 
     //执行回合
     goTurn(player){
-
+        
     }
     
     // 注册观察者
